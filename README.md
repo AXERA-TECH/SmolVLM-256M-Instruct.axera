@@ -1,7 +1,7 @@
 # SmolVLM-256M-Instruct.axera
 SmolVLM-256M-Instruct DEMO on Axera
 
-- 预编译模型下载[models](https://github.com/techshoww/SmolVLM-256M-Instruct.axera/releases/download/v1.0.0/models.tar.gz)，如需自行转换请参考[模型转换](/model_convert/README.md)
+- 预编译模型下载[models](https://huggingface.co/AXERA-TECH/SmolVLM-256M-Instruct)，如需自行转换请参考[模型转换](/model_convert/README.md)
 - [cpp demo]((./cpp))
 
 递归clone本项目
@@ -12,7 +12,7 @@ git clone --recursive https://github.com/techshoww/ax-llm.git
 ## 支持平台
 
 - [x] AX650N
-- [ ] AX630C
+- [x] AX630C
 
 ## 模型转换
 
@@ -76,14 +76,23 @@ In summary, the image depicts the Statue of Liberty in New York City, surrounded
 ```
 
 
-## 模型速度  
+## 推理速度 
+
+### python demo
 | Stage | Time |
 |------|------|
-| Vision Encoder (PTQ U16) | 121 ms  | 
-| Prefill |  512ms    |
+| Image Encoder (512x512) | 121 ms  | 
+| Prefill (prefill_len 320) |  512ms    |
 | Decode  |  11.6 token/s |
 
-实际模型耗时没这么大，python 代码性能不太好，用 [C++ code](./cpp)的话会更快。
+### C++ demo
+| Stage | Time |
+|------|------|
+| Image Encoder (512x512) | 120 ms  | 
+| Prefill (prefill_len 128)|  57ms    |
+| Decode  |  77 token/s |
+
+python 代码性能不太好，推荐 [C++ code](./cpp)。
 
 ## 技术讨论
 
